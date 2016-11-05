@@ -15,7 +15,7 @@ public class CucumberInjectorSource implements InjectorSource {
 				Stage.PRODUCTION, 
 				CucumberModules.SCENARIO, 
 				new ConfigurationModule(),
-				new WebDriverModule());
+				new ServicesModule());
 	}
 
 }

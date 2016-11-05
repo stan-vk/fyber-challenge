@@ -1,10 +1,9 @@
 package com.github.stanvk.fyberchallenge.stepdefinitions;
 
-import java.util.Objects;
-
+import com.github.stanvk.fyberchallenge.services.context.UiContextService;
 import com.github.stanvk.fyberchallenge.services.webdriver.WebDriverService;
+import com.github.stanvk.fyberchallenge.ui.imdb.TopRatedMoviesPage;
 import com.google.inject.Inject;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.jayway.awaitility.Awaitility;
 import com.jayway.awaitility.Duration;
@@ -14,15 +13,27 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.runtime.java.guice.ScenarioScoped;
 
+import java.util.Objects;
+
 @ScenarioScoped
 public class MySteps {
     @Inject
     private WebDriverService webDriverService;
+    @Inject
+    private UiContextService contextService;
 
     @Given("browser is opened and IMDB is loaded")
     public void openBrowser() {
         webDriverService.getWebDriver().get("http://www.imdb.com/chart/top");
-
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                if (!Objects.isNull(webDriverService.getWebDriver())) {
+                    webDriverService.getWebDriver().quit();
+                }
+            }
+        });
+        contextService.setContextPage(new TopRatedMoviesPage(webDriverService.getWebDriver()));
     }
 
     @Then("page should be shown")

@@ -26,11 +26,15 @@ public class FrameworkConfiguration {
     public WebDriverType getWebDriverType() {
         return Optional.ofNullable(config.getString(WEB_DRIVER_PROP))
                 .map(WebDriverType::valueOf)
-                .orElseThrow(() -> new FrameworkConfigurationException("Unspecified property: " + WEB_DRIVER_PROP));
+                .orElseThrow(() -> getConfigurationException(WEB_DRIVER_PROP));
     }
 
     private void readConfiguration() {
         config = ConfigFactory.load(CONFIG_DEFAULT_PATH);
         log.info("{}", config.getConfig("automation"));
+    }
+
+    private FrameworkConfigurationException getConfigurationException(String property) {
+        return new FrameworkConfigurationException("Unspecified property: " + property);
     }
 }

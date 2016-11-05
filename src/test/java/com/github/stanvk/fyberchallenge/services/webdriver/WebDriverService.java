@@ -6,6 +6,7 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.Objects;
@@ -45,6 +46,6 @@ public class WebDriverService {
             System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
         }
 
-        return new FirefoxDriver();
+        return new FirefoxDriver(new FirefoxProfile());
     }
 }
