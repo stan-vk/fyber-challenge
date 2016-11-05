@@ -4,26 +4,24 @@ import com.github.stanvk.fyberchallenge.services.context.UiContextService;
 import com.github.stanvk.fyberchallenge.services.webdriver.WebDriverService;
 import com.github.stanvk.fyberchallenge.ui.imdb.TopRatedMoviesPage;
 import com.google.inject.Inject;
-
-import com.jayway.awaitility.Awaitility;
-import com.jayway.awaitility.Duration;
-import com.jayway.awaitility.pollinterval.FibonacciPollInterval;
-
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.runtime.java.guice.ScenarioScoped;
+import com.google.inject.Singleton;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 
 import java.util.Objects;
 
-@ScenarioScoped
-public class MySteps {
+/**
+ * Created by Stanislav Kostsov on 05.11.2016.
+ */
+@Singleton
+public class Hooks {
     @Inject
-    private WebDriverService webDriverService;
+    WebDriverService webDriverService;
     @Inject
     private UiContextService contextService;
 
-    @Given("browser is opened and IMDB is loaded")
-    public void openBrowser() {
+    @Before("@IMDB")
+    public void imdbBefore() {
         webDriverService.getWebDriver().get("http://www.imdb.com/chart/top");
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
@@ -36,16 +34,7 @@ public class MySteps {
         contextService.setContextPage(new TopRatedMoviesPage(webDriverService.getWebDriver()));
     }
 
-    @Then("page should be shown")
-    public void pageShouldBeShown() {
-        Awaitility.await()
-                .timeout(Duration.TEN_SECONDS)
-                .pollInterval(FibonacciPollInterval.fibonacci())
-                .until(() -> contextService.getContextPage().isDisplayed());
-    }
-
-    @Then("browser is closed")
-    public void browserIsClosed() {
-        webDriverService.getWebDriver().quit();
+    @After("@IMDB")
+    public void imdbAfter() {
     }
 }

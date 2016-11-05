@@ -1,5 +1,6 @@
 package com.github.stanvk.fyberchallenge.ui.common;
 
+import com.github.stanvk.fyberchallenge.ui.interfaces.CanBeEnabled;
 import com.github.stanvk.fyberchallenge.ui.interfaces.Clickable;
 import com.github.stanvk.fyberchallenge.ui.interfaces.HasText;
 import com.github.stanvk.fyberchallenge.ui.interfaces.Visible;
@@ -10,9 +11,9 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 /**
  * Created by Stanislav Kostsov on 05.11.2016.
  */
-public class Hyperlink extends AbstractElement implements Visible, HasText, Clickable {
+public class ButtonBase extends AbstractElement implements Visible, HasText, Clickable, CanBeEnabled {
 
-    public Hyperlink(RemoteWebDriver webDriver, WebElement rootElement) {
+    public ButtonBase(RemoteWebDriver webDriver, WebElement rootElement) {
         super(webDriver, rootElement);
     }
 
@@ -34,5 +35,10 @@ public class Hyperlink extends AbstractElement implements Visible, HasText, Clic
     @Override
     public boolean isDisplayed() {
         return rootElement.isDisplayed();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return rootElement.isEnabled();
     }
 }

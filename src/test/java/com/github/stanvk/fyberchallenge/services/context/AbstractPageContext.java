@@ -2,7 +2,6 @@ package com.github.stanvk.fyberchallenge.services.context;
 
 import com.github.stanvk.fyberchallenge.ui.common.AbstractElement;
 import com.github.stanvk.fyberchallenge.ui.common.AbstractPage;
-import com.github.stanvk.fyberchallenge.ui.common.Table;
 import com.github.stanvk.fyberchallenge.ui.common.UiException;
 
 import java.util.HashMap;
@@ -13,8 +12,9 @@ import java.util.function.Function;
 /**
  * Created by Stanislav Kostsov on 05.11.2016.
  */
-public abstract class AbstractPageContext<T extends AbstractPage> {
-    T page;
+@SuppressWarnings("unchecked")
+abstract class AbstractPageContext<T extends AbstractPage> {
+    private T page;
 
     private Map<String, Function<T, ? extends AbstractElement>> getterMap;
 

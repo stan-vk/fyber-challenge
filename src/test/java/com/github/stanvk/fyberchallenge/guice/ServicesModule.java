@@ -2,6 +2,7 @@ package com.github.stanvk.fyberchallenge.guice;
 
 import com.github.stanvk.fyberchallenge.services.context.UiContextService;
 import com.github.stanvk.fyberchallenge.services.webdriver.WebDriverService;
+import com.github.stanvk.fyberchallenge.stepdefinitions.Hooks;
 import com.google.inject.AbstractModule;
 
 /**
@@ -12,5 +13,6 @@ class ServicesModule extends AbstractModule {
     protected void configure() {
         bind(WebDriverService.class);
         bind(UiContextService.class);
+        bind(Hooks.class);
     }
 }

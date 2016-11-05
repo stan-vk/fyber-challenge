@@ -13,5 +13,8 @@ public class TopRatedMoviesPageContext extends AbstractPageContext<TopRatedMovie
     @Override
     void confugure() {
         add("Top Rated Movies table", TopRatedMoviesPage::getTop250MovieTable);
+        add("Top Rated Movies sorting control", TopRatedMoviesPage::getMovieTableSortingControl);
+        add("Top Rated Movies sorting dropdown", p -> p.getMovieTableSortingControl().getDropDown());
+        add("Top Rated Movies sorting order button", p -> p.getMovieTableSortingControl().getSortingOrderButton());
     }
 }
