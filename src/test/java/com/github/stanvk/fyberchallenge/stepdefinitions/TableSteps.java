@@ -34,7 +34,7 @@ public class TableSteps {
     public void shouldContainAtLeastOneRow(String name) {
         Table table = contextService.getChild(name, Table.class);
         Awaitility.await()
-                .timeout(Duration.FIVE_SECONDS)
+                .timeout(Duration.TEN_SECONDS)
                 .pollInterval(FibonacciPollInterval.fibonacci())
                 .until(() -> table.getRows().stream().anyMatch(TableRow::isDisplayed));
     }

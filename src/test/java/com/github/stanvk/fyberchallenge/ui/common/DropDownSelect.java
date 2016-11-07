@@ -32,17 +32,11 @@ public class DropDownSelect extends AbstractElement implements DropDown {
 
     @Override
     public void expand() {
-//        if (isExpanded()) {
-//            return;
-//        }
         leftMouseClick();
     }
 
     @Override
     public void collapse() {
-//        if (!isExpanded()) {
-//            return;
-//        }
         new Actions(webDriver).sendKeys(Keys.ESCAPE).perform();
     }
 
