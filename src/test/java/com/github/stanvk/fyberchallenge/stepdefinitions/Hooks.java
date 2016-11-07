@@ -20,17 +20,23 @@ public class Hooks {
     @Inject
     private UiContextService contextService;
 
+    private boolean hookAdded = false;
+
     @Before("@IMDB")
     public void imdbBefore() {
         webDriverService.getWebDriver().get("http://www.imdb.com/chart/top");
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                if (!Objects.isNull(webDriverService.getWebDriver())) {
-                    webDriverService.getWebDriver().quit();
+        webDriverService.getWebDriver().manage().window().maximize();
+        if (!hookAdded) {
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    if (!Objects.isNull(webDriverService.getWebDriver())) {
+                        webDriverService.getWebDriver().quit();
+                    }
                 }
-            }
-        });
+            });
+            hookAdded = true;
+        }
         contextService.setContextPage(new TopRatedMoviesPage(webDriverService.getWebDriver()));
     }
 

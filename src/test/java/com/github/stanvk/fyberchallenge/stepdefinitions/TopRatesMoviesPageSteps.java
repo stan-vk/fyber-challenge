@@ -33,13 +33,7 @@ public class TopRatesMoviesPageSteps {
         TopRatesMoviesSortingControl sortingControl =
                 contextService.getChild(controlName, TopRatesMoviesSortingControl.class);
 
-        sortingControl.getDropDown().expand();
-        sortingControl.getDropDown().getItemByText(item).select();
-        Awaitility.await()
-                .timeout(Duration.TEN_SECONDS)
-                .pollInterval(FibonacciPollInterval.fibonacci())
-                .until(() -> !sortingControl.getDropDown().isExpanded());
-        sortingControl.getDropDown().collapse();
+        sortingControl.getDropDown().selectItemWithKeyboard(item);
 
         sortingControl.getSortingOrderButton().applySortingOrder(sortingOrder);
         Awaitility.await()

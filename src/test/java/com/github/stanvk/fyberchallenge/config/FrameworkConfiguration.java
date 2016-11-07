@@ -15,7 +15,8 @@ public class FrameworkConfiguration {
 
     private static final String CONFIG_DEFAULT_PATH = "automation.conf";
 
-    private static final String WEB_DRIVER_PROP = "automation.web.driver";
+    private static final String WEB_DRIVER_TYPE_PROP = "automation.web.driver.type";
+    private static final String WEB_DRIVER_VERSION_PROP = "automation.web.driver.version";
 
     private Config config;
 
@@ -24,9 +25,14 @@ public class FrameworkConfiguration {
     }
 
     public WebDriverType getWebDriverType() {
-        return Optional.ofNullable(config.getString(WEB_DRIVER_PROP))
+        return Optional.ofNullable(config.getString(WEB_DRIVER_TYPE_PROP))
                 .map(WebDriverType::valueOf)
-                .orElseThrow(() -> getConfigurationException(WEB_DRIVER_PROP));
+                .orElseThrow(() -> getConfigurationException(WEB_DRIVER_TYPE_PROP));
+    }
+
+    public String getWebDriverVersion() {
+        return Optional.ofNullable(config.getString(WEB_DRIVER_VERSION_PROP))
+                .orElseThrow(() -> getConfigurationException(WEB_DRIVER_VERSION_PROP));
     }
 
     private void readConfiguration() {

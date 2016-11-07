@@ -5,7 +5,6 @@ import com.github.stanvk.fyberchallenge.ui.interfaces.Clickable;
 import com.github.stanvk.fyberchallenge.ui.interfaces.HasText;
 import com.github.stanvk.fyberchallenge.ui.interfaces.Visible;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
@@ -15,16 +14,6 @@ public class ButtonBase extends AbstractElement implements Visible, HasText, Cli
 
     public ButtonBase(RemoteWebDriver webDriver, WebElement rootElement) {
         super(webDriver, rootElement);
-    }
-
-    @Override
-    public void leftMouseClick() {
-        rootElement.click();
-    }
-
-    @Override
-    public void rightMouseClick() {
-        new Actions(webDriver).contextClick(rootElement).perform();
     }
 
     @Override

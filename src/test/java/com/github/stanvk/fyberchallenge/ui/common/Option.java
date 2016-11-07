@@ -1,6 +1,7 @@
 package com.github.stanvk.fyberchallenge.ui.common;
 
 import com.github.stanvk.fyberchallenge.ui.interfaces.CanBeSelected;
+import com.github.stanvk.fyberchallenge.ui.interfaces.HasText;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -17,7 +18,7 @@ public class Option extends ButtonBase implements CanBeSelected {
     @Override
     public boolean isSelected() {
         String selected = rootElement.getAttribute("selected");
-        return !Objects.isNull(selected) && selected.equals("selected");
+        return !Objects.isNull(selected) && selected.equals("true");
     }
 
     @Override

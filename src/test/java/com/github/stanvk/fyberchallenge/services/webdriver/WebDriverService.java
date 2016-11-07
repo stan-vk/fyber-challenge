@@ -5,6 +5,7 @@ import com.github.stanvk.fyberchallenge.config.WebDriverType;
 import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -34,16 +35,29 @@ public class WebDriverService {
             case FIREFOX:
                 webDriver = firefoxWebDriver();
                 break;
-            case IE:
             case CHROME:
+                webDriver = chromeWebDriver();
+                break;
+            case IE:
             default:
                 throw new UnsupportedOperationException(type + " is not implemented yet");
         }
     }
 
+    private RemoteWebDriver chromeWebDriver() {
+        if (Strings.isNullOrEmpty(System.getProperty("webdriver.chrome.driver"))) {
+            String version = config.getWebDriverVersion();
+            System.setProperty("webdriver.chrome.driver"
+                    , String.format("drivers/chrome/%s/chromedriver.exe", version));
+        }
+        return new ChromeDriver();
+    }
+
     private RemoteWebDriver firefoxWebDriver() {
         if (Strings.isNullOrEmpty(System.getProperty("webdriver.gecko.driver"))) {
-            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
+            String version = config.getWebDriverVersion();
+            System.setProperty("webdriver.gecko.driver"
+                    , String.format("drivers/gecko/%s/geckodriver.exe", version));
         }
 
         return new FirefoxDriver(new FirefoxProfile());
