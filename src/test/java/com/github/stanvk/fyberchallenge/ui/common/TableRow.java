@@ -11,9 +11,4 @@ public class TableRow extends AbstractElement implements Visible {
     TableRow(RemoteWebDriver webDriver, WebElement rootElement) {
         super(webDriver, rootElement);
     }
-
-    @Override
-    public boolean isDisplayed() {
-        return rootElement.isDisplayed();
-    }
 }

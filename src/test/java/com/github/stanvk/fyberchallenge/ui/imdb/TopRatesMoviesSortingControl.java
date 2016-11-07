@@ -29,11 +29,6 @@ public class TopRatesMoviesSortingControl extends AbstractElement implements Vis
         PageFactory.initElements(webDriver, this);
     }
 
-    @Override
-    public boolean isDisplayed() {
-        return rootElement.isDisplayed();
-    }
-
     public DropDownSelect getDropDown() {
         return Optional.ofNullable(selectElement)
                 .map(e -> new DropDownSelect(webDriver, e))

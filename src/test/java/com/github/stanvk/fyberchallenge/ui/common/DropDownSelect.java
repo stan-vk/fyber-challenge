@@ -21,11 +21,6 @@ public class DropDownSelect extends AbstractElement implements DropDown {
     }
 
     @Override
-    public boolean isDisplayed() {
-        return rootElement.isDisplayed();
-    }
-
-    @Override
     public boolean isExpanded() {
         return getItems().stream().anyMatch(o -> o.isDisplayed() && o.isEnabled());
     }

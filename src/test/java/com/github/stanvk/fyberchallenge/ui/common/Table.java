@@ -18,11 +18,6 @@ public class Table extends AbstractElement implements Visible {
         super(webDriver, rootElement);
     }
 
-    @Override
-    public boolean isDisplayed() {
-        return rootElement.isDisplayed();
-    }
-
     public List<TableRow> getRows() {
         return rootElement.findElements(By.xpath(ROW_XPATH))
                 .stream()

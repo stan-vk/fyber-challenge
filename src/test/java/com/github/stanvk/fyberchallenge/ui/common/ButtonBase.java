@@ -22,11 +22,6 @@ public class ButtonBase extends AbstractElement implements Visible, HasText, Cli
     }
 
     @Override
-    public boolean isDisplayed() {
-        return rootElement.isDisplayed();
-    }
-
-    @Override
     public boolean isEnabled() {
         return rootElement.isEnabled();
     }
