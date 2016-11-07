@@ -1,6 +1,7 @@
 package com.github.stanvk.fyberchallenge.ui.common;
 
 import com.github.stanvk.fyberchallenge.ui.interfaces.Clickable;
+import com.github.stanvk.fyberchallenge.ui.interfaces.Visible;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -8,7 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 /**
  * Created by Stanislav Kostsov on 05.11.2016.
  */
-public abstract class AbstractElement implements Clickable {
+public abstract class AbstractElement implements Clickable, Visible {
     protected final RemoteWebDriver webDriver;
     protected final WebElement rootElement;
 
@@ -17,7 +18,13 @@ public abstract class AbstractElement implements Clickable {
         this.rootElement = rootElement;
     }
 
+    @Override
+    public boolean isDisplayed() {
+        return rootElement.isDisplayed();
+    }
+
     public void leftMouseClick() {
+//        scrollIntoView();
         new Actions(webDriver).moveToElement(rootElement).click().perform();
     }
 
@@ -30,6 +37,10 @@ public abstract class AbstractElement implements Clickable {
     public void moveMouseTo() {
 //        moveTo(rootElement);
         new Actions(webDriver).moveToElement(rootElement).perform();
+    }
+
+    public void scrollIntoView() {
+        webDriver.executeScript("arguments[0].scrollIntoView(true);", rootElement);
     }
 
 //    private Robot moveTo(WebElement element) {

@@ -40,7 +40,6 @@ public class TopRatesMoviesPageSteps {
                 .timeout(Duration.TEN_SECONDS)
                 .pollInterval(FibonacciPollInterval.fibonacci())
                 .until(() -> sortingControl.getSortingOrderButton().getSortingOrder().equals(sortingOrder));
-
     }
 
     @Then("IMDB top rated movies page should be shown")

@@ -30,7 +30,7 @@ public class TableSteps {
                 .until(() -> table.getRows().size() == rows);
     }
 
-    @Then("^\"([^\"]*)\" should contain at least one row$")
+    @Then("^\"([^\"]*)\" table should contain at least one row$")
     public void shouldContainAtLeastOneRow(String name) {
         Table table = contextService.getChild(name, Table.class);
         Awaitility.await()

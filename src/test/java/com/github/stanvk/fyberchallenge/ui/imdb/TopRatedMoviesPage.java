@@ -14,11 +14,12 @@ import java.util.Optional;
  * Created by Stanislav Kostsov on 05.11.2016.
  */
 public class TopRatedMoviesPage extends AbstractPage {
-    private static final String ROOT_ELEMENT_ID = "home_img_holder";
+    private static final String ROOT_ELEMENT_XPATH = "//h1[text()='Top Rated Movies']";
     private static final String TOP_250_MOVIE_TABLE_XPATH = "//table[@data-caller-name='chart-top250movie']";
     private static final String SORTING_CONTROL_CLASS = "nav";
+    private static final String BY_GENRE_LIST_XPATH = "//span[h3/text()='Top Rated Movies by Genre']/ul";
 
-    @FindBy(id = ROOT_ELEMENT_ID)
+    @FindBy(xpath = ROOT_ELEMENT_XPATH)
     private WebElement rootElement;
 
     @FindBy(xpath = TOP_250_MOVIE_TABLE_XPATH)
@@ -26,6 +27,9 @@ public class TopRatedMoviesPage extends AbstractPage {
 
     @FindBy(className = SORTING_CONTROL_CLASS)
     private WebElement sortingControlRootElement;
+
+    @FindBy(xpath = BY_GENRE_LIST_XPATH)
+    private WebElement byGenreListRootElement;
 
     public TopRatedMoviesPage(RemoteWebDriver webDriver) {
         super(webDriver);
@@ -47,5 +51,11 @@ public class TopRatedMoviesPage extends AbstractPage {
         return Optional.ofNullable(sortingControlRootElement)
                 .map(e -> new TopRatesMoviesSortingControl(webDriver, e))
                 .orElseThrow(() -> new UiException("Root element was not found by selector: " + SORTING_CONTROL_CLASS));
+    }
+
+    public TopRatedMoviesByGenreList getMoviesByGenreList() {
+        return Optional.ofNullable(byGenreListRootElement)
+                .map(e -> new TopRatedMoviesByGenreList(webDriver, e))
+                .orElseThrow(() -> new UiException("Root element was not found by selector: " + BY_GENRE_LIST_XPATH));
     }
 }

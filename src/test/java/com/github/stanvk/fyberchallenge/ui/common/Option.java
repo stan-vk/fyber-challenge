@@ -1,7 +1,6 @@
 package com.github.stanvk.fyberchallenge.ui.common;
 
 import com.github.stanvk.fyberchallenge.ui.interfaces.CanBeSelected;
-import com.github.stanvk.fyberchallenge.ui.interfaces.HasText;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 

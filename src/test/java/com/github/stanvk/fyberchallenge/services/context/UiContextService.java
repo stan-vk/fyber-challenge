@@ -2,6 +2,7 @@ package com.github.stanvk.fyberchallenge.services.context;
 
 import com.github.stanvk.fyberchallenge.services.webdriver.WebDriverService;
 import com.github.stanvk.fyberchallenge.ui.common.AbstractPage;
+import com.github.stanvk.fyberchallenge.ui.imdb.TopRatedMoviesByWesternGenrePage;
 import com.github.stanvk.fyberchallenge.ui.imdb.TopRatedMoviesPage;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -26,6 +27,9 @@ public class UiContextService {
         this.contextPage = contextPage;
         if (contextPage instanceof TopRatedMoviesPage) {
             pageContext = new TopRatedMoviesPageContext((TopRatedMoviesPage) contextPage);
+        }
+        else if (contextPage instanceof TopRatedMoviesByWesternGenrePage) {
+            pageContext = new TopRatedMoviesByWesternGenrePageContext((TopRatedMoviesByWesternGenrePage) contextPage);
         }
     }
 
